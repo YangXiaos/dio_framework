@@ -1,0 +1,11 @@
+
+.idea/
+
+dist/
+
+dioCore.egg-info/
+
+build/
+
+dioCore/__pycache__/*
+
