@@ -1,6 +1,6 @@
 # @Time         : 18-5-14 下午9:54
 # @Author       : DioMryang
-# @File         : __init__.py.py
+# @File         : Const.py.py
 # @Description  :
 
 
@@ -17,4 +17,10 @@ class CrawlFailError(Exception):
     """
     pass
 
+
+class Over(Exception):
+    """
+    抓取结束
+    """
+    pass
 
