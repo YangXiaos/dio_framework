@@ -45,6 +45,10 @@ class Message(StandardizeMixin):
         incDepth: 种子深度 +1
         updateInfo: 更新data
     """
+    LINK = "0"
+    CONTENT = "1"
+    LINK_AND_CONTENT = "2"
+
     def __init__(self, info=None, crawlerId=-1, siteId=-1, taskId=-1, depth=0, type=SeedType.link):
         self.type = type
         self.depth = depth
@@ -54,49 +58,49 @@ class Message(StandardizeMixin):
         self.taskId = taskId
         self.siteId = siteId
 
-    def getInfo(self):
+    def getInfo(self) -> dict:
         """
         获取Info
         :return: 返回数据流
         """
         return self.info
 
-    def getSiteId(self):
+    def getSiteId(self) -> int:
         """
         获取 站点id
         :return:
         """
         return self.siteId
 
-    def getTaskId(self):
+    def getTaskId(self) -> int:
         """
         获取 任务id
         :return:
         """
-        return self.info.get("task_id", "-1")
+        return self.info.get("task_id", -1)
 
-    def getCrawlerId(self):
+    def getCrawlerId(self) -> int:
         """
         获取 模板id
         :return:
         """
-        return self.info.get("tp_id", "-1")
+        return self.info.get("tp_id", -1)
 
-    def getFullUrl(self):
+    def getFullUrl(self) -> str:
         """
         获取 full_url
         :return:
         """
         return self.info.get("full_url", "-1")
 
-    def incDepth(self):
+    def incDepth(self) -> None:
         """
         种子深度 +1
         :return:
         """
         self.depth += 1
 
-    def updateInfo(self, info):
+    def updateInfo(self, info: dict) -> None:
         """
         更新 info
         :param info: information
@@ -104,7 +108,11 @@ class Message(StandardizeMixin):
         """
         self.info.update(info)
 
-    def toPython(self):
+    def addInfo(self, keyName: str, value: str) -> None:
+        """添加info"""
+        self.info[keyName] = value
+
+    def toPython(self) -> dict:
         """
         返回python对象
         :return:
