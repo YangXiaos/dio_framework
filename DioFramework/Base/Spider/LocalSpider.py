@@ -5,7 +5,7 @@
 import re
 
 from DioFramework.Base.Message import Message
-from DioFramework.Base.Spider import Spider
+from DioFramework.Base.Spider.Spider import Spider
 
 
 class LocalRegexSpider(Spider):
