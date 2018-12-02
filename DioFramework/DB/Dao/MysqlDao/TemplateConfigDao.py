@@ -4,10 +4,10 @@
 # @Description  :
 from sqlalchemy.ext.declarative import declarative_base
 
-from DioCore.Units import JsonUnit
+from DioCore.Utils import JsonUtil
 from sqlalchemy import Column, String, Integer
 
-from DioCore.Units.ModuleUnit import loadClass
+from DioCore.Utils.ModuleUtil import loadClass
 from DioFramework.DB.Dao.MysqlDao.Dao import Dao
 from DioFramework.DB.Dao.MysqlDao.ProcessorDao import ProcessorDao
 
@@ -28,7 +28,7 @@ class TemplateConfig(declarative_base(), Dao):
 
     def getTemplateComponentConfig(self) -> list:
         """获取模板 config"""
-        return JsonUnit.toPython(self.template_component_config)
+        return JsonUtil.toPython(self.template_component_config)
 
     def getComponentList(self) -> list:
         """
@@ -43,4 +43,4 @@ class TemplateConfig(declarative_base(), Dao):
 
     def getMessageMatchStrategyConfig(self) -> dict:
         """获取 message 匹配策略"""
-        return JsonUnit.toJson(self.message_match_strategy_config)
+        return JsonUtil.toJson(self.message_match_strategy_config)

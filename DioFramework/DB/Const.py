@@ -3,7 +3,7 @@
 # @File         : Const.py.py
 # @Description  :
 
-from DioCore.DB import MysqlUnit, MongoUnit, RedisUnit
+from DioCore.DB import MysqlUtil, MongoUtil, RedisUtil
 from DioFramework.Const import DEFAULT_MYSQL_CONFIG, DEFAULT_MONGODB_CONFIG, DEFAULT_REDIS_CONFIG
 
 
@@ -11,9 +11,9 @@ class Connection(object):
     """
     数据库连接
     """
-    MYSQL_DEFAULT = MysqlUnit.createConnect(**DEFAULT_MYSQL_CONFIG)
-    MONGODB_DEFAULT = MongoUnit.createConnect(**DEFAULT_MONGODB_CONFIG)
-    REDIS_DEFAULT = RedisUnit.createConnect(**DEFAULT_REDIS_CONFIG)
+    MYSQL_DEFAULT = MysqlUtil.createConnect(**DEFAULT_MYSQL_CONFIG)
+    MONGODB_DEFAULT = MongoUtil.createConnect(**DEFAULT_MONGODB_CONFIG)
+    REDIS_DEFAULT = RedisUtil.createConnect(**DEFAULT_REDIS_CONFIG)
 
 
 class RedisKey(object):

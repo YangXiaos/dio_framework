@@ -5,7 +5,7 @@
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.ext.declarative import declarative_base
 
-from DioCore.Units import JsonUnit
+from DioCore.Utils import JsonUtil
 from DioFramework.DB.Dao.MysqlDao.Dao import Dao
 from DioFramework.DB.Dao.MysqlDao.TemplateConfigDao import TemplateConfig
 
@@ -29,11 +29,11 @@ class TaskConfig(declarative_base(), Dao):
 
     def getMessageProcessorConfig(self) -> list:
         """获取json"""
-        return JsonUnit.toPython(self.message_processor_config)
+        return JsonUtil.toPython(self.message_processor_config)
 
     def getJobProcessorParams(self) -> list:
         """获取jobConfig json"""
-        return JsonUnit.toPython(self.job_processor_params)
+        return JsonUtil.toPython(self.job_processor_params)
 
     def getTemplateIdConfigMapping(self) -> dict:
         """获取模板 id 配置 匹配"""
@@ -42,14 +42,14 @@ class TaskConfig(declarative_base(), Dao):
 
     def getJobParams(self) -> dict:
         """获取job的参数"""
-        return JsonUnit.toPython(self.job_params)
+        return JsonUtil.toPython(self.job_params)
 
 
 if __name__ == '__main__':
-    from DioCore.DB import MysqlUnit
+    from DioCore.DB import MysqlUtil
     from DioFramework import Const
 
-    conn = MysqlUnit.createConnect(**Const.MYSQL_CONFIG)
+    conn = MysqlUtil.createConnect(**Const.MYSQL_CONFIG)
 
     task = TaskConfig(desc="baidu - 站点", spider_config="[{\"1\": \"type\"}]",
                       job_config="{\"1\": \"type\"}", template_ids="1,2", type="incr", site_ids="1", status=0)

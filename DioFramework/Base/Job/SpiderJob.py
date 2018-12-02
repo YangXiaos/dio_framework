@@ -3,8 +3,8 @@
 # @File         : SpiderJob.py
 # @Description  :
 
-from DioCore.Units import JsonUnit
-from DioCore.Units.DateTimeUnit import DateTimeUnit
+from DioCore.Utils import JsonUtil
+from DioCore.Utils import DateTimeUtil
 from DioFramework.Base.Distributor.CommonDistributor import CommonDistributor
 
 from DioFramework.Base.Job.Job import Job
@@ -133,7 +133,7 @@ class SpiderJob(Job):
     @classmethod
     def form(cls, json: str):
         """序列化"""
-        params = JsonUnit.toPython(json)
+        params = JsonUtil.toPython(json)
         kwargs = {
             "id": params["job_id"],
             "taskId": params["task_id"],

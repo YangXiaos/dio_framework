@@ -5,7 +5,7 @@
 from typing import Union, Dict
 
 from DioCore.DB.RedisClient import Hash
-from DioCore.Units import TimeUnit
+from DioCore.Utils import TimeUtil
 
 from DioFramework.Base.Job.Job import Job
 from DioFramework.Base.Processor.JobProcessor import JobProcessor
@@ -71,7 +71,7 @@ class JobSeedReader(JobProcessor):
                 return job
 
             # 暂停数秒
-            TimeUnit.sleep(self.waitingTime)
+            TimeUtil.sleep(self.waitingTime)
 
 
 if __name__ == '__main__':

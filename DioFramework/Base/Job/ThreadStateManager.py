@@ -7,7 +7,7 @@ import logging
 
 from DioCore.DB.RedisClient import Hash
 
-from DioCore.Units.ThreadUnit import getCurrentThreadName
+from DioCore.Utils.ThreadUtil import getCurrentThreadName
 from DioFramework.Const import JobThreadState
 from DioFramework.DB.Const import Connection
 

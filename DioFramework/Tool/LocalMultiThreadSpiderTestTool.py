@@ -5,10 +5,10 @@
 import logging
 from queue import Queue
 
-from DioCore.Units import ThreadUnit, TimeUnit
+from DioCore.Utils import ThreadUtil, TimeUtil
 
 from DioFramework.Base.Spider.LocalSpider import LocalRegexSpider
-from DioCore.Units.ThreadUnit import getCurrentThreadName
+from DioCore.Utils.ThreadUtil import getCurrentThreadName
 
 
 class LocalMultiThreadSpiderTestTool(object):
@@ -30,7 +30,7 @@ class LocalMultiThreadSpiderTestTool(object):
         return None
 
     def run(self):
-        ThreadUnit.multiThreadingRun(self.execute, threadNum=4)
+        ThreadUtil.multiThreadingRun(self.execute, threadNum=4)
 
     def execute(self, num):
         """
@@ -45,7 +45,7 @@ class LocalMultiThreadSpiderTestTool(object):
             # 判断是否需要线程
             if self.queue.empty():
                 self.threadStopState[getCurrentThreadName()] = True
-                TimeUnit.sleep(5)
+                TimeUtil.sleep(5)
                 continue
             self.threadStopState[getCurrentThreadName()] = False
 

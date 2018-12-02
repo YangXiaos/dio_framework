@@ -2,7 +2,7 @@
 # @Author       : DioMryang
 # @File         : TpSpider.py
 # @Description  :
-from DioCore.Units import JsonUnit
+from DioCore.Utils import JsonUtil
 
 from DioFramework.Base.Processor import Processor
 from DioFramework.DB.Dao.MysqlDao import TemplateConfigDao
@@ -20,8 +20,8 @@ class TpSpider(Processor):
         conn = kwargs.get("runner").conn
         tp = conn.query(TemplateConfigDao).filter(TemplateConfigDao.id == self.pid).one()
 
-        self.spiderConfig = JsonUnit.toPython(tp.spider_config)
-        self.matchConfig = JsonUnit.toPython(tp.match_config)
+        self.spiderConfig = JsonUtil.toPython(tp.spider_config)
+        self.matchConfig = JsonUtil.toPython(tp.match_config)
 
         self.components = []
 

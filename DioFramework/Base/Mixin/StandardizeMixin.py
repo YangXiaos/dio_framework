@@ -2,7 +2,7 @@
 # @Author       : DioMryang
 # @File         : StandardizeMixin.py
 # @Description  :
-from DioCore.Units import JsonUnit
+from DioCore.Utils import JsonUtil
 
 
 class StandardizeMixin(object):
@@ -12,7 +12,7 @@ class StandardizeMixin(object):
         返回 json字符串形式
         :return:
         """
-        return JsonUnit.toJson(self.toPython())
+        return JsonUtil.toJson(self.toPython())
 
     @classmethod
     def form(cls, json):
@@ -21,7 +21,7 @@ class StandardizeMixin(object):
         :param json:
         :return:
         """
-        return cls(**JsonUnit.toPython(json))
+        return cls(**JsonUtil.toPython(json))
 
     def toPython(self):
         """

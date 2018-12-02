@@ -180,7 +180,7 @@ async异步任务 seeds队列
 
 # 3. 项目架构
 项目架构配置
-  * DioCore：采集系统base，集成Network，Units核心工具类
+  * DioCore：采集系统base，集成Network，Utils核心工具类
   * DioFramework：采集系统服务架构，爬虫架构
   * DioCrawler: 采集运作sdk
   * DioScheduler：采集系统任务调度
@@ -197,12 +197,12 @@ dio_core（采集系统核心）
     * createConnect：Redis创建链接工具
 * Network
   * Downloader：下载器
-* Units
-  * JsonUnits：json处理工具
-  * ModuleUnits：模块加载工具
-  * DateUnits：时间处理工具
-  * UrlUnits：url处理器
-  * ThreadUnits：线程工具
+* Utils
+  * JsonUtils：json处理工具
+  * ModuleUtils：模块加载工具
+  * DateUtils：时间处理工具
+  * UrlUtils：url处理器
+  * ThreadUtils：线程工具
 ## 3.2 Framework（服务依赖）
 * Dao
   * TaskConfigDao：任务配置接口

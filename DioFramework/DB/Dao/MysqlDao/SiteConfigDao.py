@@ -21,8 +21,8 @@ class SiteConfig(declarative_base(), Dao):
 
 if __name__ == '__main__':
     from DioFramework import Const
-    from DioCore.DB import MysqlUnit
-    conn = MysqlUnit.createConnect(**Const.MYSQL_CONFIG)
+    from DioCore.DB import MysqlUtil
+    conn = MysqlUtil.createConnect(**Const.MYSQL_CONFIG)
 
     site = SiteConfig(desc="baidu - 导航页", domain="baidu.com", parend_id=None, tag=0, status=0)
     conn.add(site)

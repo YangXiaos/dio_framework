@@ -2,7 +2,7 @@
 # @Author       : DioMryang
 # @File         : JobMultiThreadProcessor.py
 # @Description  : 多线程跑数处理器
-from DioCore.Units import ThreadUnit
+from DioCore.Utils import ThreadUtil
 
 from DioFramework.Base.Processor.JobProcessor import JobProcessor
 from DioFramework.Error import Over
@@ -39,7 +39,7 @@ class JobMultiThreadProcessor(JobProcessor):
                               for cfg in job.taskConfig.getMessageProcessorConfig()]
         threadNum = int(jobProcessorParams.get("threadNum", )) if "threadNum" in jobProcessorParams else self.threadNum
 
-        ThreadUnit.multiThreadingRun(self.executeJob, threadNum=threadNum, commonArgs=[job])
+        ThreadUtil.multiThreadingRun(self.executeJob, threadNum=threadNum, commonArgs=[job])
         self.logger.info("thread is over ")
 
     def executeJob(self, job):
@@ -55,7 +55,7 @@ class JobMultiThreadProcessor(JobProcessor):
                     messages = processor.run(job, messages)
             except Over:
                 self.logger.info(" threadSpider[{threadName}] is done"
-                                 .format(**{"threadName": ThreadUnit.getCurrentThreadName()}))
+                                 .format(**{"threadName": ThreadUtil.getCurrentThreadName()}))
                 break
             except Exception as ignored:
                 pass

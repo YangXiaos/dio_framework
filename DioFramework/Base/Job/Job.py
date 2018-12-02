@@ -4,8 +4,8 @@
 # @Description  :
 import uuid
 
-from DioCore.Units import JsonUnit
-from DioCore.Units.DateTimeUnit import DateTimeUnit
+from DioCore.Utils import JsonUtil
+from DioCore.Utils import DateTimeUtil
 from DioFramework.Base.Message import Message
 from DioFramework.Base.Mixin.LoadClassToolMixin import LoadClassToolMixin
 from DioFramework.Base.Mixin.StandardizeMixin import StandardizeMixin
@@ -72,8 +72,8 @@ class Job(StandardizeMixin, LoadClassToolMixin):
         self.taskId = taskId
         self.runnerId = runnerId
 
-        self.createTime = DateTimeUnit.getCurStandardDate() if createTime is "" else createTime
-        self.startTime = DateTimeUnit.getCurStandardDate() if startTime is "" else startTime
+        self.createTime = DateTimeUtil.getCurStandardDate() if createTime is "" else createTime
+        self.startTime = DateTimeUtil.getCurStandardDate() if startTime is "" else startTime
         self.endTime = endTime
 
         self.threadStateManager = None
@@ -106,7 +106,7 @@ class Job(StandardizeMixin, LoadClassToolMixin):
         :return:
         """
         self.state = JobState.FINISH
-        self.endTime = DateTimeUnit.getCurStandardDate()
+        self.endTime = DateTimeUtil.getCurStandardDate()
 
     def toPython(self):
         """
@@ -132,7 +132,7 @@ class Job(StandardizeMixin, LoadClassToolMixin):
     @classmethod
     def form(cls, json: str):
         """序列化"""
-        params = JsonUnit.toPython(json)
+        params = JsonUtil.toPython(json)
         kwargs = {
             "id": params["job_id"],
             "taskId": params["task_id"],
@@ -152,7 +152,7 @@ class Job(StandardizeMixin, LoadClassToolMixin):
         返回 json字符串形式
         :return:
         """
-        return JsonUnit.toJson(self.toPython())
+        return JsonUtil.toJson(self.toPython())
 
 
 if __name__ == '__main__':

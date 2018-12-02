@@ -4,7 +4,7 @@
 # @Description  :
 from typing import List
 
-from DioCore.Units import TimeUnit
+from DioCore.Utils import TimeUtil
 from DioFramework.Base.Job.Job import Job
 from DioFramework.Base.Message import Message
 
@@ -42,4 +42,4 @@ class MessageReader(MessageProcessor):
             if job.threadStateManager.isAllThreadsOver():
                 raise Over()
 
-            TimeUnit.sleep(int(self.params.get("waiting_time", )))
+            TimeUtil.sleep(int(self.params.get("waiting_time", )))

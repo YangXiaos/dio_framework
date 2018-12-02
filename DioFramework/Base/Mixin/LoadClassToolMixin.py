@@ -2,7 +2,7 @@
 # @Author       : DioMryang
 # @File         : LoadClassToolMixin.py
 # @Description  :
-from DioCore.Units.ModuleUnit import loadClass
+from DioCore.Utils.ModuleUtil import loadClass
 
 from DioFramework.DB.Dao.MysqlDao.ProcessorDao import ProcessorDao
 
