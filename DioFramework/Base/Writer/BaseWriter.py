@@ -27,7 +27,7 @@ class BaseWriter(metaclass=abc.ABCMeta):
         self.logger = logging.getLogger(self.__class__.__name__)
         self.params = params
 
-    @abc.abstractclassmethod
+    @abc.abstractmethod
     def write(self, job: Job, message: Message):
         """写入message"""
         pass
