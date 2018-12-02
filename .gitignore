@@ -9,3 +9,4 @@ build/
 
 DioFramework/__pycache__/*
 
+.pytest_cache

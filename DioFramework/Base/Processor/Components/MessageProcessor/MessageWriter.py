@@ -31,6 +31,7 @@ class MessageMongodbWriter(MessageProcessor):
     def run(self, job: Job, messages: List[Message]):
         self.writer.writeMany(job, messages)
 
+
 if __name__ == '__main__':
     params = {
         "db_name": "test",
