@@ -2,7 +2,7 @@
 # @Author       : DioMryang
 # @File         : SpiderProcessor.py
 # @Description  :
-from DioFramework.Base.Processor import Processor
+from DioFramework.Base.Processor.Processor import Processor
 
 
 class MessageProcessor(Processor):

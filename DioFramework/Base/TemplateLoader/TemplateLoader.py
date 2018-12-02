@@ -4,6 +4,8 @@
 # @Description  :
 import logging
 
+from typing import List
+
 from DioFramework.Base.Job.Job import Job
 from DioFramework.Base.Message import Message
 from DioFramework.Base.Mixin.LoadClassToolMixin import LoadClassToolMixin
@@ -43,7 +45,7 @@ class TemplateLoader(LoadClassToolMixin):
         self.messageMatchStrategy = self.initObjByConfig(self.messageMatchStrategyConfig)
         self.logger.info("init TemplateLoader {}".format(self.tpId))
 
-    def execute(self, job: Job, message: Message) -> list:
+    def execute(self, job: Job, message: Message) -> List[Message]:
         """
         调用模板进行跑数
         :param message: 消息
@@ -56,7 +58,7 @@ class TemplateLoader(LoadClassToolMixin):
 
         return messages
 
-    def match(self, message: Message):
+    def match(self, message: Message) -> bool:
         """
         匹配message
         :param message:
@@ -64,6 +66,6 @@ class TemplateLoader(LoadClassToolMixin):
         """
         return self.messageMatchStrategy.match(message)
 
-    def getTemplateId(self):
+    def getTemplateId(self) -> int:
         """获取模板id"""
         return self.tpId

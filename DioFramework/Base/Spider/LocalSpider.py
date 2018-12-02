@@ -10,12 +10,12 @@ from DioFramework.Base.Spider import Spider
 
 class LocalRegexSpider(Spider):
     """
-
+    正则匹配爬虫
     """
     regex = ""
 
     def match(self, message: Message):
-        return re.match(self.regex, message.getFullUrl()) is not None
+        return re.match(self.regex, message.getEnterUrl()) is not None
 
     def execute(self, message, job=None):
         """
@@ -24,8 +24,8 @@ class LocalRegexSpider(Spider):
         :param message:
         :return:
         """
-        self.logger.info("[{}] {}".format(self.__class__.__name__, message.getFullUrl()))
-        fullUrl = self.getFullUrl(message.getInfo())
-        messages = list(self.crawl(fullUrl, message.getInfo()))
+        self.logger.info("[{}] {}".format(self.__class__.__name__, message.getEnterUrl()))
+        enterUrl = self.getEnterUrl(message.getInfo())
+        messages = list(self.crawl(enterUrl, message.getInfo()))
         self.setInfoSpiderName(messages)
         return messages

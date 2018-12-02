@@ -3,9 +3,9 @@
 
 dist/
 
-dioCore.egg-info/
+DioFramework.egg-info/
 
 build/
 
-dioCore/__pycache__/*
+DioFramework/__pycache__/*
 

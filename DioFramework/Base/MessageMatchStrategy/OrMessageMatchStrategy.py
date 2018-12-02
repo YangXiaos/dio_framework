@@ -13,15 +13,14 @@ class OrMessageMatchStrategy(MessageMatchStrategy):
 
     def match(self, message: Message) -> bool:
         """
-        只有　一个
+        || 匹配第一个验证成功的
         :param message:
         :return:
         """
         for fieldName, matchRule in self.params.items():
-            value = message.info.get(fieldName, )
-            fucName, rule = matchRule.items().get(0, )
+            value = message.info.get(fieldName)
+            fucName, rule = list(matchRule.items())[0]
 
-            if self.matchRuleFunction[fucName](rule, value):
+            if self.validate(rule, value, fucName):
                 return True
-
         return False

@@ -13,11 +13,10 @@ class MessageMatchStrategy(metaclass=abc.ABCMeta):
     模板匹配基类
 
     Attributes:
-        config: list 参数，列表元素为多个字段组合的匹配规则。
+        params: list 参数，列表元素为多个字段组合的匹配规则。
             ```
-
               {
-                "full_url": {
+                "enter_url": {
                   "regex": ".*"
                 },
                 "spider_ids": {
@@ -47,10 +46,14 @@ class MessageMatchStrategy(metaclass=abc.ABCMeta):
         """
         self.params = params
 
-    @abc.abstractclassmethod
+    @abc.abstractmethod
     def match(self, message: Message) -> bool:
         """
         迭代字段 判断message 是否匹配正确
         :param message: message
         :return:
         """
+
+    def validate(self, rule, value, fucName):
+        """获取验证函数"""
+        return self.matchRuleFunction[fucName](rule, value)

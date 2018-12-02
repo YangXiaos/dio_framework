@@ -12,7 +12,11 @@ from DioFramework.Base.Job.Job import Job
 class BaseWriter(metaclass=abc.ABCMeta):
     """
     base writer
+    param :
+    `{
 
+    }
+    `
     Attributes:
         logger: 日志工具
 

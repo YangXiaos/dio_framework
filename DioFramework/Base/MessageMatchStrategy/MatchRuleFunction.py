@@ -49,6 +49,6 @@ class MatchRuleFunction(object):
         判断是否包含
         :param rule: 参数列表
         :param value: 匹配值
-        :return: Ｔｒｕｅ/False
+        :return: True/False
         """
         return value in map(str, rule)

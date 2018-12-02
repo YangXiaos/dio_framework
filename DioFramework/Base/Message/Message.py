@@ -86,12 +86,12 @@ class Message(StandardizeMixin):
         """
         return self.info.get("tp_id", -1)
 
-    def getFullUrl(self) -> str:
+    def getEnterUrl(self) -> str:
         """
-        获取 full_url
+        获取 enter_url
         :return:
         """
-        return self.info.get("full_url", "-1")
+        return self.info.get("enter_url", "-1")
 
     def incDepth(self) -> None:
         """

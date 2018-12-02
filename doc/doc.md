@@ -485,9 +485,9 @@ job处理组件。
 {
   "class_name": ""
   "params": [
-    // full_url 的匹配规则
+    // enter_url 的匹配规则
     {
-      "full_url": {
+      "enter_url": {
         "regex": ".*"
       }
     },

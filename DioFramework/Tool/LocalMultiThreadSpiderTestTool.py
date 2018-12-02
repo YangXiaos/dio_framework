@@ -7,7 +7,7 @@ from queue import Queue
 
 from DioCore.Units import ThreadUnit, TimeUnit
 
-from DioFramework.Base.LocalSpider import LocalRegexSpider
+from DioFramework.Base.Spider.LocalSpider import LocalRegexSpider
 from build.lib.DioCore.Units.ThreadUnit import getCurrentThreadName
 
 
@@ -52,13 +52,13 @@ class LocalMultiThreadSpiderTestTool(object):
             message = self.queue.get()
 
             # 去重
-            if message.getFullUrl() in self.messageSet:
+            if message.getEnterUrl() in self.messageSet:
                 continue
-            self.messageSet.add(message.getFullUrl())
+            self.messageSet.add(message.getEnterUrl())
 
             # 获取匹配爬虫并跑数
             spider = self.match(message)
             msgs = spider.execute(message)
             for msg in msgs:
-                if msg.getFullUrl() not in self.messageSet:
+                if msg.getEnterUrl() not in self.messageSet:
                     self.queue.put(msg)

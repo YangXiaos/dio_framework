@@ -2,5 +2,6 @@
 # @Author       : DioMryang
 # @File         : Const.py.py
 # @Description  :
-from DioFramework.Base.MatchRuleFunction import MatchRuleFunction
+from DioFramework.Base.MessageMatchStrategy.MatchRuleFunction import MatchRuleFunction
 from DioFramework.Base.MessageMatchStrategy.BaseMessageMatchStrategy import MessageMatchStrategy
+from DioFramework.Base.MessageMatchStrategy.OrMessageMatchStrategy import OrMessageMatchStrategy

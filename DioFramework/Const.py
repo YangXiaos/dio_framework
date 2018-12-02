@@ -81,4 +81,10 @@ DEFAULT_REDIS_CONFIG ={
 
 
 #
+class MSG_FIELD(object):
+
+    ENTER_URL = "enter_url"
+    URL = "url"
+    SPIDER_NAME = "__spider__"
+    CONTENT = "content"
 

@@ -4,16 +4,17 @@
 # @Description  :
 import logging
 
-from typing import List
+from typing import Generator
 
 from DioFramework.Base.Message import Message
+from DioFramework.Const import MSG_FIELD
 
 
 class Spider(object):
     """
     Spider
 
-    爬虫抓取类
+    用于处理数据
     """
     def __init__(self):
         self.taskId = -1
@@ -21,17 +22,17 @@ class Spider(object):
         self.context = {}
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def getFullUrl(self, info):
+    def getEnterUrl(self, info):
         """
-        获取 fullUrl
+        获取 enterUrl
         :return:
         """
-        return info.get("full_url")
+        return info.get(MSG_FIELD.ENTER_URL)
 
-    def crawl(self, fullUrl, info) -> List[Message]:
+    def crawl(self, enterUrl, info) -> Generator[Message]:
         """
         爬虫逻辑编写处
-        :param fullUrl: 入口url
+        :param enterUrl: 入口url
         :param info: 信息
         :return:
         """
@@ -44,17 +45,15 @@ class Spider(object):
         :param message:
         :return:
         """
-        fullUrl = self.getFullUrl(message.getInfo())
+        enterUrl = self.getEnterUrl(message.getInfo())
         self.jobId = job.jobId
         self.taskId = job.taskId
         self.context = job.context
-        messages = self.crawl(fullUrl, message.getInfo())
-        self.setInfoSpiderName(messages)
-        return list(messages)
+
+        for msg in self.crawl(enterUrl, message.getInfo()):
+            self.setInfoSpiderName(msg)
+            yield msg
 
     @classmethod
-    def setInfoSpiderName(cls, messages):
-        for message in messages:
-            message.getInfo()["__spider__"] = cls.__name__
-
-
+    def setInfoSpiderName(cls, message):
+        message.getInfo().update(MSG_FIELD.SPIDER_NAME, cls.__name__)
