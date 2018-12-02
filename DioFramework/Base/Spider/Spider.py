@@ -29,7 +29,7 @@ class Spider(object):
         """
         return info.get(MSG_FIELD.ENTER_URL)
 
-    def crawl(self, enterUrl, info) -> Generator[Message]:
+    def crawl(self, enterUrl, info):
         """
         爬虫逻辑编写处
         :param enterUrl: 入口url

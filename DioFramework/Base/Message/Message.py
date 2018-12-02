@@ -4,7 +4,7 @@
 # @Description  : message
 
 from DioFramework.Base.Mixin.StandardizeMixin import StandardizeMixin
-from DioFramework.Const import SeedType
+from DioFramework.Const import SeedType, MSG_FIELD
 
 
 class Message(StandardizeMixin):
@@ -93,6 +93,15 @@ class Message(StandardizeMixin):
         """
         return self.info.get("enter_url", "-1")
 
+    def getInsertData(self) -> dict:
+        data = self.info.copy()
+        data.update({
+            MSG_FIELD.CRAWLER_ID: self.crawlerId,
+            MSG_FIELD.SITE_ID: self.siteId,
+            MSG_FIELD.TASK_ID: self.taskId
+        })
+        return data
+
     def incDepth(self) -> None:
         """
         种子深度 +1
@@ -111,6 +120,9 @@ class Message(StandardizeMixin):
     def addInfo(self, keyName: str, value: str) -> None:
         """添加info"""
         self.info[keyName] = value
+
+    def setEnterUrl(self, enterUrl: str):
+        self.info[MSG_FIELD.ENTER_URL] = enterUrl
 
     def toPython(self) -> dict:
         """

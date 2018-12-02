@@ -8,7 +8,7 @@ from queue import Queue
 from DioCore.Units import ThreadUnit, TimeUnit
 
 from DioFramework.Base.Spider.LocalSpider import LocalRegexSpider
-from build.lib.DioCore.Units.ThreadUnit import getCurrentThreadName
+from DioCore.Units.ThreadUnit import getCurrentThreadName
 
 
 class LocalMultiThreadSpiderTestTool(object):

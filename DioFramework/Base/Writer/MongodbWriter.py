@@ -27,9 +27,10 @@ class MongodbWriter(BaseWriter):
 
     def write(self, job: Job, message: Message):
         self.logger.info(" mongodb writer distribute {}".format(message.info))
-        self.collection.insert_one(message.info)
+        self.collection.save(message.getInsertData())
 
     def writeMany(self, job: Job, messages: List[Message]):
         for message in messages:
             self.logger.info(" mongodb writer distribute {}".format(message.info))
-            self.collection.insert_one(message.info)
+            self.collection.save(message.getInsertData())
+
