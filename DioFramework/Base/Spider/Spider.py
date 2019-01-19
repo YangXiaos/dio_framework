@@ -4,9 +4,6 @@
 # @Description  :
 import logging
 
-from typing import Generator
-
-from DioFramework.Base.Message import Message
 from DioFramework.Const import MSG_FIELD
 
 

@@ -87,4 +87,8 @@ class MSG_FIELD(object):
     URL = "url"
     SPIDER_NAME = "__spider__"
     CONTENT = "content"
+    CRAWLER_ID = "crawler_id"
+    SITE_ID = "site_id"
+    TASK_ID = "task_id"
+
 
