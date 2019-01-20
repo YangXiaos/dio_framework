@@ -4,6 +4,7 @@
 # @Description  :
 import logging
 
+from DioFramework.Base.Message import Message
 from DioFramework.Const import MSG_FIELD
 
 
@@ -52,5 +53,6 @@ class Spider(object):
             yield msg
 
     @classmethod
-    def setInfoSpiderName(cls, message):
-        message.getInfo().update(MSG_FIELD.SPIDER_NAME, cls.__name__)
+    def setInfoSpiderName(cls, messages):
+        for message in messages:
+            message.getInfo().update(MSG_FIELD.SPIDER_NAME, cls.__name__)
