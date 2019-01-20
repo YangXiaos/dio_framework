@@ -55,4 +55,4 @@ class Spider(object):
     @classmethod
     def setInfoSpiderName(cls, messages):
         for message in messages:
-            message.getInfo().update(MSG_FIELD.SPIDER_NAME, cls.__name__)
+            message.getInfo().update({MSG_FIELD.SPIDER_NAME, cls.__name__})
