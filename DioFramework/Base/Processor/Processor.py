@@ -29,9 +29,10 @@ class Processor(LoadClassToolMixin):
         `logger`: logger
         `config`: 配置参数
         `pid`: 处理器id
+        `params`: 处理器参数
 
     Methods:
-        `start`: 内置初始跑数函数
+        `execute`: 内置初始跑数函数
         `run`: 处理器的主要处理逻辑函数
         `beforeRun`: 跑数之前的加载处理
         `afterRun`: 跑数之后的加载处理
@@ -64,6 +65,7 @@ class Processor(LoadClassToolMixin):
         except Exception as e:
             self.handleError(error=e, *args, **kwargs)
             raise e
+        return result
 
     def run(self, *args, **kwargs):
         """

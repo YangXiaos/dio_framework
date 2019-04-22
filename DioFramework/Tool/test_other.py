@@ -4,7 +4,7 @@
 # @Description  :
 from DioCore.Downloader.Downloader import Setting
 
-from DioCore.Downloader import Downloader
+from DioCore.Network.Downloader import Downloader
 
 
 def test_proex():

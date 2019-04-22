@@ -16,7 +16,7 @@ class TemplateConfig(declarative_base(), Dao):
     """
     模板配置 数据库接口
     """
-    __tablename__ = 'dio.table'
+    __tablename__ = 'dio.template.config'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     desc = Column(String)
@@ -24,7 +24,7 @@ class TemplateConfig(declarative_base(), Dao):
     site_ids = Column(String)
 
     template_component_config = Column(String)
-    message_match_strategy_config = Column(Integer)
+    message_match_strategy_config = Column(String)
 
     def getTemplateComponentConfig(self) -> list:
         """获取模板 config"""
@@ -43,4 +43,4 @@ class TemplateConfig(declarative_base(), Dao):
 
     def getMessageMatchStrategyConfig(self) -> dict:
         """获取 message 匹配策略"""
-        return JsonUtil.toJson(self.message_match_strategy_config)
+        return JsonUtil.toPython(self.message_match_strategy_config)

@@ -2,7 +2,7 @@
 # @Author       : DioMryang
 # @File         : TemplateComponent.py
 # @Description  :
-from DioFramework.Base.Processor import Processor
+from DioFramework.Base.Processor.Processor import Processor
 
 
 class TemplateComponent(Processor):
@@ -11,7 +11,6 @@ class TemplateComponent(Processor):
     """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.templateLoader = kwargs.get("templateLoader")
-        self.desc = self.templateLoader.desc
-        self.type = self.templateLoader.type
-        self.tpId = self.templateLoader.tpId
+        self.tpDesc = self.config.get("tpDesc")
+        self.tpType = self.config.get("tpType")
+        self.tpId = self.config.get("tpId")

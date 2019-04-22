@@ -11,5 +11,5 @@ setup(
     description="dio 采集系统服务依赖",
     author="dio_mryang",
     url="https://github.com/YangXiaos/",
-    packages=find_packages(), install_requires=['sqlalchemy']
+    packages=find_packages(), install_requires=['sqlalchemy', 'selenium']
 )

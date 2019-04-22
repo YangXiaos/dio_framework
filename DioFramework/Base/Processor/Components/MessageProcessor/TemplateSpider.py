@@ -9,7 +9,7 @@ from DioFramework.Base.Message import Message
 from DioFramework.Base.Processor.MessageProcessor import MessageProcessor
 
 
-class MessageReader(MessageProcessor):
+class TemplateSpider(MessageProcessor):
     """
     message 读取 processor
 

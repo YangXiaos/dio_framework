@@ -35,7 +35,7 @@ class JobMultiThreadProcessor(JobProcessor):
     def run(self, job):
         """跑数"""
         jobProcessorParams = job.taskConfig.getJobProcessorParams()
-        self.processorList = [self.loadProcessorByConfig(cfg, job)
+        self.processorList = [self.loadProcessorByConfig(cfg)
                               for cfg in job.taskConfig.getMessageProcessorConfig()]
         threadNum = int(jobProcessorParams.get("threadNum", )) if "threadNum" in jobProcessorParams else self.threadNum
 

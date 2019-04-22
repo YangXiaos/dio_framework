@@ -34,14 +34,17 @@ class TemplateLoader(LoadClassToolMixin):
     """
     def __init__(self, tpConfig: TemplateConfig):
         self.componentsConfig = tpConfig.template_component_config
-        self.messageMatchStrategyConfig = LoadClassToolMixin.initObjByConfig(tpConfig.getMessageMatchStrategyConfig()) 
+        self.messageMatchStrategyConfig = tpConfig.getMessageMatchStrategyConfig()
         self.tpId = tpConfig.id
         self.desc = tpConfig.desc
         self.type = tpConfig.type
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        self.componentList = [self.loadProcessorByConfig(config=cpCfg, templateLoader=self)
-                              for cpCfg in tpConfig.getTemplateComponentConfig()]
+        self.componentList = []
+        for cpConfig in tpConfig.getTemplateComponentConfig():
+            cpConfig.update({"tpId": self.tpId, "tpDesc": self.desc, "tpType": self.type})
+            self.loadProcessorByConfig(config=cpConfig)
+
         self.messageMatchStrategy = self.initObjByConfig(self.messageMatchStrategyConfig)
         self.logger.info("init TemplateLoader {}".format(self.tpId))
 

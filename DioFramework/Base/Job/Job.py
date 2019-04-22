@@ -91,20 +91,22 @@ class Job(StandardizeMixin, LoadClassToolMixin):
                 raise TypeError("error Message type".format(msg.__class__.__name__))
 
         self.queue = None
+        self.context = {
+            "create_time": self.createTime,
+            "start_time": self.startTime,
+
+        }
+
+    def setTemplateLoaderMapping(self, tpMapping: dict):
+        """设置模板匹配"""
+        self.templateLoaderMapping = tpMapping
 
     def setQueue(self, queue):
-        """
-        设置任务队列
-        :param queue: 跑数队列
-        :return:
-        """
+        """设置任务队列"""
         self.queue = queue
 
     def finish(self):
-        """
-        结束
-        :return:
-        """
+        """结束"""
         self.state = JobState.FINISH
         self.endTime = DateTimeUtil.getCurStandardDate()
 

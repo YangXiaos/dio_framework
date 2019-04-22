@@ -2,4 +2,3 @@
 # @Author       : DioMryang
 # @File         : Const.py.py
 # @Description  :
-from DioCore.Downloader import Downloader

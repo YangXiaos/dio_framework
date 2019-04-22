@@ -2,32 +2,38 @@
 # @Author       : DioMryang
 # @File         : Spider.py
 # @Description  :
+import abc
 import logging
 
+from typing import Iterable
+
+from DioFramework.Base.Job.Job import Job
 from DioFramework.Base.Message import Message
 from DioFramework.Const import MSG_FIELD
 
 
-class Spider(object):
+class Spider(metaclass=abc.ABCMeta):
     """
     Spider
 
     用于处理数据
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.taskId = -1
         self.jobId = ""
         self.context = {}
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def getEnterUrl(self, info):
+    @classmethod
+    def getEnterUrl(cls, info):
         """
         获取 enterUrl
         :return:
         """
         return info.get(MSG_FIELD.ENTER_URL)
 
-    def crawl(self, enterUrl, info):
+    @abc.abstractmethod
+    def crawl(self, enterUrl, info) -> Iterable[Message]:
         """
         爬虫逻辑编写处
         :param enterUrl: 入口url
@@ -36,15 +42,17 @@ class Spider(object):
         """
         pass
 
-    def execute(self, message, job):
+    def execute(self, message, job: Job):
         """
         跑数
         :param job:
         :param message:
         :return:
         """
+        self.logger.info("[{}]: {}".format(self.__class__.__name__, message.getEnterUrl()))
+
         enterUrl = self.getEnterUrl(message.getInfo())
-        self.jobId = job.jobId
+        self.jobId = job.id
         self.taskId = job.taskId
         self.context = job.context
 
@@ -53,6 +61,5 @@ class Spider(object):
             yield msg
 
     @classmethod
-    def setInfoSpiderName(cls, messages):
-        for message in messages:
-            message.getInfo().update({MSG_FIELD.SPIDER_NAME, cls.__name__})
+    def setInfoSpiderName(cls, msg: Message):
+        msg.getInfo().update({MSG_FIELD.SPIDER_NAME: cls.__name__})

@@ -76,7 +76,7 @@ class SpiderJob(Job):
         # 获取job 参数
         self.jobParams = self.taskConfig.getJobParams()
 
-        # 设置内存队列,线程状态管理器,分发
+        # 设置内存队列,线程状态管理器,分发处理器,
         self.queue = self.initObjByConfig(self.jobParams.get("queue_config"))
         self.threadStateManager = self.initObjByConfig(self.jobParams.get("thread_state_manager_config"))
         self.templateLoaderMapping = {tpId: TemplateLoader(templateCfg)

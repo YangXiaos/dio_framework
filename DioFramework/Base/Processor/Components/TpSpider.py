@@ -4,7 +4,7 @@
 # @Description  :
 from DioCore.Utils import JsonUtil
 
-from DioFramework.Base.Processor import Processor
+from DioFramework.Base.Processor.Processor import Processor
 from DioFramework.DB.Dao.MysqlDao import TemplateConfigDao
 
 
