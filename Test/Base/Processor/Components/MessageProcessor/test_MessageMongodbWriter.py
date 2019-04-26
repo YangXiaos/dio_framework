@@ -1,5 +1,5 @@
 from DioFramework.Base.Message import Message
-from DioFramework.Base.Processor.Components.MessageProcessor.MessageWriter import MessageMongodbWriter
+from DioFramework.Base.Processor.MessageProcessor.MessageWriter import MessageMongodbWriter
 from Test.Example import testJob, testMsgs
 
 

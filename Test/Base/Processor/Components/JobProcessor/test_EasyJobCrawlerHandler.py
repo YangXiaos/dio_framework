@@ -2,7 +2,7 @@ import logging
 
 from DioFramework.Base.Job.Job import Job
 from DioFramework.Base.Message import Message
-from DioFramework.Base.Processor.Components.JobProcessor.EasyJobCrawlerHandler import EasyJobCrawlerHandler
+from DioFramework.Base.Processor.JobProcessor import EasyJobCrawlerHandler
 from DioFramework.Const import MSG_FIELD
 
 

@@ -5,7 +5,7 @@ from Test.Example import testJob
 from DioFramework.Base.Message import Message
 from DioFramework.Const import MSG_FIELD
 from DioFramework.DB.Dao.MysqlDao.TemplateConfigDao import TemplateConfig
-from build.lib.DioFramework.Base.TemplateLoader.TemplateLoader import TemplateLoader
+from DioFramework.Base.TemplateLoader.TemplateLoader import TemplateLoader
 
 
 def test_TemplateLoader():

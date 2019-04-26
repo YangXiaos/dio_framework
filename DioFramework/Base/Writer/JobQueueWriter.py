@@ -10,6 +10,10 @@ from DioFramework.Base.Writer.BaseWriter import BaseWriter
 class JobQueueWriter(BaseWriter):
     """
     job queue 分发
+    {
+        "db_name": "db",
+        "collection_name": "coll"
+    }
 
     """
     def write(self, job: Job, message: Message):

@@ -64,7 +64,7 @@ class Job(StandardizeMixin, LoadClassToolMixin):
 
     """
     def __init__(self, id="", taskId=-1, siteId=-1, runnerId=-1, state=JobState.WAITING,
-                 createTime="", startTime="", endTime="", initMsgs=None):
+            createTime="", startTime="", endTime="", initMsgs=None):
         self.id = uuid.uuid4().__str__() if id is "" else id
 
         self.state = state
@@ -96,6 +96,9 @@ class Job(StandardizeMixin, LoadClassToolMixin):
             "start_time": self.startTime,
 
         }
+
+    # def setDistributor(self, distributor: ):
+
 
     def setTemplateLoaderMapping(self, tpMapping: dict):
         """设置模板匹配"""

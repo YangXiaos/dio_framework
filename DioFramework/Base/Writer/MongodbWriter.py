@@ -18,16 +18,16 @@ class MongodbWriter(BaseWriter):
         "collection_name": "coll"
     }
     """
-    def __init__(self, **kwargs):
-        super(MongodbWriter, self).__init__(**kwargs)
+    def __init__(self, params: dict):
+        super(MongodbWriter, self).__init__(params)
         self.connection = Connection.MONGODB_DEFAULT
         self.dbName = self.params.get("db_name")
         self.collectionName = self.params.get("collection_name")
         self.collection = self.connection[self.dbName][self.collectionName]
 
     def write(self, job: Job, message: Message):
-        self.logger.info(" mongodb writer distribute {}".format(message.info))
-        self.collection.save(message.getInsertData())
+        self.logger.info(" mongodb writer distribute {}".format(message))
+        self.collection.insert_one(message.getInsertData())
 
     def writeMany(self, job: Job, messages: List[Message]):
         for message in messages:

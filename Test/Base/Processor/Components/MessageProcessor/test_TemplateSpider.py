@@ -6,7 +6,7 @@ from DioFramework.Const import MSG_FIELD
 from DioFramework.DB.Dao.MysqlDao.TemplateConfigDao import TemplateConfig
 from Test.Example import testJob
 
-from DioFramework.Base.Processor.Components.MessageProcessor.TemplateSpider import TemplateSpider
+from DioFramework.Base.Processor.MessageProcessor.TemplateSpider import TemplateSpider
 
 
 def test_run():

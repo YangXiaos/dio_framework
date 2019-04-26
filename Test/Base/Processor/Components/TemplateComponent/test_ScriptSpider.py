@@ -1,5 +1,5 @@
 from DioFramework.Base.Message import Message
-from DioFramework.Base.Processor.Components.TemplateComponent.ScriptSpider import ScriptSpider
+from DioFramework.Base.Processor.TemplateComponent.ScriptSpider import ScriptSpider
 from Test.Example import testJob
 from Test.TestUtil import pretty
 

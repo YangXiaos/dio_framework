@@ -33,5 +33,5 @@ class ScriptSpider(TemplateComponent):
         """执行组件"""
         result = []
         for message in messages:
-            result += self.spider.execute(message, job)
+            result.extend(self.spider.execute(message, job))
         return result

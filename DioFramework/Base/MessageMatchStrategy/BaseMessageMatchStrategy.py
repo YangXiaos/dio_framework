@@ -13,11 +13,11 @@ class MessageMatchStrategy(metaclass=abc.ABCMeta):
     模板匹配基类
 
     Attributes:
-        params: list 参数，列表元素为多个字段组合的匹配规则。
+        params: dict 参数，列表元素为多个字段组合的匹配规则。
             ```
               {
                 "enter_url": {
-                  "regex": ".*"
+                  "perfect_regex": ".*"
                 },
                 "spider_ids": {
                   "equals": "12321"
@@ -35,8 +35,8 @@ class MessageMatchStrategy(metaclass=abc.ABCMeta):
     matchRuleFunction = {
         "contain": MatchRuleFunction.contain,
         "equal": MatchRuleFunction.equal,
-        "partialRegex": MatchRuleFunction.partialRegex,
-        "perfectRegex": MatchRuleFunction.perfectRegex,
+        "partial_regex": MatchRuleFunction.partialRegex,
+        "perfect_regex": MatchRuleFunction.perfectRegex,
     }
 
     def __init__(self, params: dict):
