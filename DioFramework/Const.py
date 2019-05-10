@@ -37,7 +37,6 @@ class JobState(object):
     WAITING = "WAITING"
     RUNNING = "RUNNING"
     OVER = "OVER"
-    FINISH = "FINISH"
     KILLED = "KILLED"
 
 

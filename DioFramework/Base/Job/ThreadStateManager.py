@@ -19,6 +19,7 @@ class BaseThreadStateManager(metaclass=abc.ABCMeta):
     Methods
 
     """
+    KEY_FORMAT = "{curRunnerId}_{jobId}_{threadName}"
     RUNNING = "RUNNING"
     OVER = "OVER"
     DONE = "DONE"
@@ -36,11 +37,6 @@ class BaseThreadStateManager(metaclass=abc.ABCMeta):
     @abc.abstractclassmethod
     def setStateOver(self):
         """设置当前线程结束"""
-        pass
-
-    @abc.abstractclassmethod
-    def setStateDone(self):
-        """设置当前线程状态结束"""
         pass
 
     @abc.abstractclassmethod
@@ -81,8 +77,6 @@ class RedisThreadStateManager(BaseThreadStateManager):
         getKeyName：根据format 设置键名
     """
 
-    KEY_FORMAT = "{curRunnerId}_{jobId}_{threadName}"
-
     def __init__(self, curRunnerId: str, jobId: str):
         self.jobId = jobId
         self.curRunnerId = curRunnerId
@@ -103,10 +97,6 @@ class RedisThreadStateManager(BaseThreadStateManager):
         """设置threadState 当前线程状态为 OVER"""
         self.threadStateHash.hset(self.getKeyName(), self.OVER)
 
-    def setStateDone(self):
-        """设置当前线程状态结束"""
-        self.threadStateHash.hset(self.getKeyName(), self.DONE)
-
     def isAllThreadsOver(self) -> bool:
         """判断所有线程是否结束"""
         return all(map(lambda val: val == JobThreadState.OVER, self.threadStateHash.hvals()))
@@ -118,19 +108,22 @@ class RedisThreadStateManager(BaseThreadStateManager):
 
     def finish(self):
         """结束"""
-        del self.threadStateHash
+        pass
 
 
 class CacheThreadStateManager(BaseThreadStateManager):
     """
     内存 线程状态manager
     """
+    def __init__(self, curRunnerId: str, jobId: str):
+        self.jobId = jobId
+        self.curRunnerId = curRunnerId
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self.threadStateHash = {}
+        self.logger.info(" init CacheThreadStateManager success: runner ->{} , job ->{}".format(curRunnerId, jobId))
 
     def setStateDone(self):
         self.threadStateHash[getCurrentThreadName()] = self.DONE
-
-    def __init__(self):
-        self.threadStateHash = {}
 
     def getState(self) -> str:
         return self.threadStateHash[getCurrentThreadName()]

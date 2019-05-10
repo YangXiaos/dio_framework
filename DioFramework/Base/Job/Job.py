@@ -6,7 +6,6 @@ import uuid
 
 from DioCore.Utils import JsonUtil
 from DioCore.Utils import DateTimeUtil
-from DioFramework.Base.Message import Message
 from DioFramework.Base.Mixin.LoadClassToolMixin import LoadClassToolMixin
 from DioFramework.Base.Mixin.StandardizeMixin import StandardizeMixin
 from DioFramework.Const import JobState
@@ -63,9 +62,10 @@ class Job(StandardizeMixin, LoadClassToolMixin):
     GlobalAttributes:
 
     """
-    def __init__(self, id="", taskId=-1, siteId=-1, runnerId=-1, state=JobState.WAITING,
-            createTime="", startTime="", endTime="", initMsgs=None):
-        self.id = uuid.uuid4().__str__() if id is "" else id
+
+    def __init__(self, jobId: str, taskId: int=-1, siteId: int=-1, runnerId: int=-1, state: str=JobState.RUNNING,
+                 createTime="", startTime="", endTime=""):
+        self.jobId = jobId
 
         self.state = state
         self.siteId = siteId
@@ -79,26 +79,13 @@ class Job(StandardizeMixin, LoadClassToolMixin):
         self.threadStateManager = None
         self.templateLoaderMapping = {}
         self.distributor = None
-
-        # 初始化种子
-        self.initMsgs = []
-        for msg in initMsgs if initMsgs is not None else []:
-            if isinstance(msg, dict):
-                self.initMsgs.append(Message(**msg))
-            elif isinstance(msg, Message):
-                self.initMsgs.append(msg)
-            else:
-                raise TypeError("error Message type".format(msg.__class__.__name__))
-
         self.queue = None
+        self.taskConfig = None
+        self.taskConfig = None
         self.context = {
             "create_time": self.createTime,
             "start_time": self.startTime,
-
         }
-
-    # def setDistributor(self, distributor: ):
-
 
     def setTemplateLoaderMapping(self, tpMapping: dict):
         """设置模板匹配"""
@@ -110,7 +97,6 @@ class Job(StandardizeMixin, LoadClassToolMixin):
 
     def finish(self):
         """结束"""
-        self.state = JobState.FINISH
         self.endTime = DateTimeUtil.getCurStandardDate()
 
     def toPython(self):
@@ -119,12 +105,11 @@ class Job(StandardizeMixin, LoadClassToolMixin):
         :return: 返回字典形态的对象
         """
         return {
-            "id": self.id,
+            "job_id": self.jobId,
             "task_id": self.taskId,
             "site_id": self.siteId,
             "runner_id": self.runnerId,
             "state": self.state,
-
             "create_time": self.createTime,
             "start_time": self.startTime,
             "end_time": self.endTime
@@ -132,23 +117,26 @@ class Job(StandardizeMixin, LoadClassToolMixin):
 
     def getFormatParams(self) -> dict:
         """获取渲染参数"""
-        return {"job_id": self.id, "task_id": self.taskId, "site_id": self.siteId, "runner_id": self.runnerId}
+        return {
+            "job_id": self.jobId,
+            "task_id": self.taskId,
+            "site_id": self.siteId,
+            "runner_id": self.runnerId
+        }
 
     @classmethod
     def form(cls, json: str):
         """序列化"""
         params = JsonUtil.toPython(json)
         kwargs = {
-            "id": params["job_id"],
+            "jobId": params["job_id"],
             "taskId": params["task_id"],
             "siteId": params["site_id"],
             "state": params["state"],
-
             "createTime": params["create_time"],
             "startTime": params["start_time"],
             "endTime": params["end_time"],
             "runnerId": params["runner_id"],
-            "initMsgs": params["init_msgs"]
         }
         return cls(**kwargs)
 
@@ -161,5 +149,5 @@ class Job(StandardizeMixin, LoadClassToolMixin):
 
 
 if __name__ == '__main__':
-    job = Job()
+    job = Job(uuid.uuid4().__str__())
     print(job.toJson())

@@ -4,7 +4,6 @@
 # @Description  :
 from typing import List
 
-from DioCore.Utils import TimeUtil
 from DioFramework.Base.Job.Job import Job
 from DioFramework.Base.Message import Message
 
@@ -25,21 +24,11 @@ class MessageReader(MessageProcessor):
     }
 
     """
-
     def run(self, job: Job, message: List[Message]):
         """执行"""
-        while True:
-            message = job.queue.get()
+        message = job.queue.get()
 
-            # 判断是否有message， 有设置线程RUNNING，返回message ，没有设置为OVER
-            if message is not None:
-                job.threadStateManager.setRunning()
-                return [message]
-            else:
-                job.threadStateManager.setOver()
-
-            # 判断所有线程是否结束
-            if job.threadStateManager.isAllThreadsOver():
-                raise Over()
-
-            TimeUtil.sleep(int(self.params.get("waiting_time", )))
+        # 判断是否有message, 有则返回msgs 无则
+        if message is not None:
+            return [message]
+        raise Over()

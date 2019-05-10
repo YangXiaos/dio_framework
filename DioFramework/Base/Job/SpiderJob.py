@@ -118,14 +118,6 @@ class SpiderJob(Job):
             "end_time": self.endTime
         }
 
-    def updateState(self):
-        """
-        获取最新 State
-        :return:
-        """
-        self.state = Connection.REDIS_DEFAULT.hget(RedisKey.JobStateHash, self.id)
-        return self.state
-
     def getFormatParams(self) -> dict:
         """获取渲染参数"""
         return {"job_id": self.id, "task_id": self.taskId, "site_id": self.siteId, "runner_id": self.runnerId}
